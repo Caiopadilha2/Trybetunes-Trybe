@@ -1,11 +1,11 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Login from './pages/Login';
 import Search from './pages/Search';
 import Album from './pages/Album';
 import Favorites from './pages/Favorites';
-import Profile from './pages/Profile';
 import ProfileEdit from './pages/ProfileEdit';
+import Profile from './pages/Profile';
 import NotFound from './pages/NotFound';
 
 class App extends React.Component {
@@ -13,13 +13,16 @@ class App extends React.Component {
     return (
       <BrowserRouter>
 
-        <Route path="/" Component={ Login } />
-        <Route path="/search" Component={ Search } />
-        <Route path="/album/:id" Component={ Album } />
-        <Route path="/favorites" Component={ Favorites } />
-        <Route path="/profile/edit" Component={ ProfileEdit } />
-        <Route path="/profile" Component={ Profile } />
-        <Route path="/*" Component={ NotFound } />
+        <Switch>
+          <Route exact path="/" component={ Login } />
+          <Route path="/Search" component={ Search } />
+          <Route path="/Album/:id" component={ Album } />
+          <Route path="/Favorites" component={ Favorites } />
+          <Route path="/Profile/edit" component={ ProfileEdit } />
+          <Route path="/Profile" component={ Profile } />
+          <Route path="*" component={ NotFound } />
+
+        </Switch>
 
       </BrowserRouter>
     );

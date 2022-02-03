@@ -5,8 +5,11 @@ class Search extends React.Component {
   render() {
     return (
       <div data-testid="page-search">
-        <span>Login</span>
         <Header />
+        <form>
+          <input type="text" data-testid="search-artist-input" />
+          <button type="submit" data-testid="search-artist-button">Pesquisar</button>
+        </form>
       </div>
     );
   }

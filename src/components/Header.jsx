@@ -11,7 +11,7 @@ class Header extends React.Component {
 
           <Link to="/favorites" data-testid="link-to-favorites">Favoritos</Link>
 
-          <Link to="/profile" data-testid="link-to-profile"> Meu Perfil</Link>
+          <Link to="/profile" data-testid="link-to-profile">Meu Perfil</Link>
 
         </nav>
       </div>

@@ -28,5 +28,6 @@ class App extends React.Component {
     );
   }
 }
+// Em ordem, do mais restrito para o menos restrito. Mas, como usei o Switch, não sei se isso faz sentido. Testar depois.
 
 export default App;

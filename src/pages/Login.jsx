@@ -1,4 +1,7 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
+import { createUser } from '../services/userAPI';
+import Loading from '../components/Loading';
 
 class Login extends React.Component {
   constructor() {
@@ -7,6 +10,8 @@ class Login extends React.Component {
     this.state = {
       nomeUsuario: '',
       botaoDesabilitado: true,
+      mensagemLoading: false,
+      redirecionando: false,
     };
   }
 
@@ -26,24 +31,38 @@ class Login extends React.Component {
     // Se o texto digitado no input tiver 3 ou mais caracteres, seto o estado para o botão não ficar mais desabilitado, mudando para false.
   }
 
+  cliqueLogin = async () => {
+    this.setState({ mensagemLoading: true });
+    // Seta a mensagem de loading como true para começar. Vai ser renderizada lá no render (?)
+    const { nomeUsuario } = this.state;
+    await createUser({ name: nomeUsuario });
+    // Usando a função que cria usuário para guardar na chave ''name'', o valor do input em nomeUsuario.
+    this.setState({ mensagemLoading: false, redirecionando: true });
+    // Depois do retorno dessa função de criar usuário, temos que tirar o loading passando false, e redirecionar passando true pro redirecionando.
+  }
+
   render() {
-    const { botaoDesabilitado } = this.state;
+    const { botaoDesabilitado, mensagemLoading, redirecionando } = this.state;
 
     return (
       <div data-testid="page-login">
+        { redirecionando && <Redirect to="/search" />}
+        { mensagemLoading && <Loading /> }
+        {/* https://v5.reactrouter.com/web/api/Redirect */}
+        {/* Renderiza para loading se a mensagemLoading for igual a true, e renderiza-redireciona para search se redirecionando for true. */}
         <form>
           <input
             type="text"
             data-testid="login-name-input"
             onChange={ this.handleInputChange }
-            // Quando mudar algo, chama a função que vai atualizando o valor no nome do usuário. Para acessar, tenho que trazer a const botao
-            // Desabilitado para usar o this.state.
+            // Quando mudar algo, chama a função que vai atualizando o valor no nome do usuário. Para acessar, tenho que trazer a const botaoDesabilitado para usar o this.state.
           />
           <button
             type="submit"
             data-testid="login-submit-button"
             disabled={ botaoDesabilitado }
             // Aqui o botão vai habilitar/desabilitar de acordo com o booleano retornado do valor de botaoDesabilitado.
+            onClick={ this.cliqueLogin }
           >
             Entrar
           </button>

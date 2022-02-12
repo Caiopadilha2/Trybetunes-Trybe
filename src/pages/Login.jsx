@@ -23,8 +23,8 @@ class Login extends React.Component {
 
   validarBotao = () => {
     // lint pede para guardar o número 3 numa constante.
-    const minimoTres = 3;
     const { nomeUsuario } = this.state;
+    const minimoTres = 3;
     if (nomeUsuario.length >= minimoTres) {
       this.setState({ botaoDesabilitado: false });
     }
@@ -47,26 +47,26 @@ class Login extends React.Component {
     return (
       <div data-testid="page-login">
         { redirecionando && <Redirect to="/search" />}
-        { mensagemLoading && <Loading /> }
-        {/* https://v5.reactrouter.com/web/api/Redirect */}
-        {/* Renderiza para loading se a mensagemLoading for igual a true, e renderiza-redireciona para search se redirecionando for true. */}
-        <form>
-          <input
-            type="text"
-            data-testid="login-name-input"
-            onChange={ this.handleInputChange }
+        { mensagemLoading ? <Loading /> : (
+
+          <form>
+            <input
+              type="text"
+              data-testid="login-name-input"
+              onChange={ this.handleInputChange }
             // Quando mudar algo, chama a função que vai atualizando o valor no nome do usuário. Para acessar, tenho que trazer a const botaoDesabilitado para usar o this.state.
-          />
-          <button
-            type="submit"
-            data-testid="login-submit-button"
-            disabled={ botaoDesabilitado }
-            // Aqui o botão vai habilitar/desabilitar de acordo com o booleano retornado do valor de botaoDesabilitado.
-            onClick={ this.cliqueLogin }
-          >
-            Entrar
-          </button>
-        </form>
+            />
+            <button
+              type="submit"
+              data-testid="login-submit-button"
+              disabled={ botaoDesabilitado }
+              // Aqui o botão vai habilitar/desabilitar de acordo com o booleano retornado do valor de botaoDesabilitado.
+              onClick={ this.cliqueLogin }
+            >
+              Entrar
+            </button>
+          </form>
+        )}
       </div>
     );
   }

@@ -25,7 +25,7 @@ class AlbumCard extends React.Component {
 }
 
 AlbumCard.propTypes = {
-  collectionId: PropType.string.isRequired,
+  collectionId: PropType.number.isRequired,
   collectionName: PropType.string.isRequired,
   artistName: PropType.string.isRequired,
   artworkUrl100: PropType.string.isRequired,

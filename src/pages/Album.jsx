@@ -46,7 +46,9 @@ class Album extends React.Component {
 
     if (isChecked === true) {
       await addSong(track);
-    };
+    } else {
+      await removeSong(track);
+    }
 
     const favorites = await getFavoriteSongs();
     this.setState({

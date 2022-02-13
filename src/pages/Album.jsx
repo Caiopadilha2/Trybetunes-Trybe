@@ -11,27 +11,27 @@ class Album extends React.Component {
     super();
 
     this.state = {
-      artistName: '', // Nomes que vem nas informações do album, é a posição 0 do array. Após isso, tudo o que vem são músicas.
-      collectionName: '',
-      musicas: [],
-      listaMusicasFavoritas: [],
-      mensagemLoading: false,
+      artistName: '',
+      albumName: '',
+      trackList: [],
+      favoriteList: [],
+      isLoading: false,
     };
   }
 
   async componentDidMount() {
     // console.log(this) O ID quando clica no album está em props.match.params.id
     const { match: { params: { id } } } = this.props;
-    const informaçõesAlbum = await getMusics(id);
+    const albumInformation = await getMusics(id);
     // console.log(musicas);
-    const { artistName, collectionName } = informaçõesAlbum[0];
-    const musicas = informaçõesAlbum.slice(1);
+    const { artistName, collectionName } = albumInformation[0];
+    const musics = albumInformation.slice(1);
     const favorites = await getFavoriteSongs();
     this.setState({
       artistName,
-      collectionName,
-      musicas,
-      listaMusicasFavoritas: favorites,
+      albumName: collectionName,
+      trackList: musics,
+      favoriteList: favorites,
     });
   }
 
@@ -40,9 +40,9 @@ class Album extends React.Component {
     const isChecked = target.checked;
     const trackId = Number(target.name);
 
-    this.setState({ mensagemLoading: true });
-    const informaçõesAlbum = await getMusics(id);
-    const track = informaçõesAlbum.find((music) => music.trackId === trackId);
+    this.setState({ isLoading: true });
+    const albumInformation = await getMusics(id);
+    const track = albumInformation.find((music) => music.trackId === trackId);
 
     if (isChecked === true) {
       await addSong(track);
@@ -52,35 +52,35 @@ class Album extends React.Component {
 
     const favorites = await getFavoriteSongs();
     this.setState({
-      mensagemLoading: false,
-      listaMusicasFavoritas: favorites,
+      isLoading: false,
+      favoriteList: favorites,
     });
   };
 
   isFavoriteSong = (id) => {
-    const { listaMusicasFavoritas } = this.state;
-    return listaMusicasFavoritas.some((track) => track.trackId === id);
+    const { favoriteList } = this.state;
+    return favoriteList.some((track) => track.trackId === id);
   }
 
   render() {
-    const { artistName, collectionName, musicas, mensagemLoading } = this.state;
+    const { artistName, albumName, trackList, isLoading } = this.state;
     return (
       <>
         <Header />
         <div data-testid="page-album">
           <h2>Album(s)</h2>
-          <h3 data-testid="album-name">{ collectionName }</h3>
+          <h3 data-testid="album-name">{ albumName }</h3>
           <h3 data-testid="artist-name">{ artistName }</h3>
-          { mensagemLoading ? <Loading /> : (
-            musicas.map((musica) => (
-              <div key={ musica.trackNumber }>
+          { isLoading ? <Loading /> : (
+            trackList.map((track) => (
+              <div key={ track.trackNumber }>
                 <MusicCard
-                  trackName={ musica.trackName }
-                  previewUrl={ musica.previewUrl }
-                  trackId={ musica.trackId }
-                  trackInfos={ musica }
+                  trackName={ track.trackName }
+                  previewUrl={ track.previewUrl }
+                  trackId={ track.trackId }
+                  trackInfos={ track }
                   onChange={ this.handleCheckboxFavorite }
-                  isChecked={ this.isFavoriteSong(musica.trackId) }
+                  isChecked={ this.isFavoriteSong(track.trackId) }
                 />
               </div>
             )))}

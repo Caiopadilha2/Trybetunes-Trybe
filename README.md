@@ -14,8 +14,6 @@ Todos os arquivos ou funções que não foram desenvolvidos por mim foram removi
 Você pode acessar os termos de uso através desse [link](https://www.betrybe.com/termos-de-uso).
 
 
-## Instalação
-
 ## Rodando localmente
 
 Clone o projeto:

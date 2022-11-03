@@ -52,10 +52,14 @@ Inicie o servidor:
 
 ## Funcionalidades
 
-- Cadastrar veículos (carros e motos).
-- Atualizar veículos no banco de dados.
-- Deletar veículos específicos.
-- E todas as outras funções de uma API CRUD.
+- Fazer login.
+- Pesquisar por uma banda ou artista.
+- Listar os álbuns disponíveis dessa banda ou artista.
+- Visualizar as músicas de um álbum selecionado.
+- Reproduzir uma prévia das músicas deste álbum.
+- Favoritar e desfavoritar músicas.
+- Ver a lista de músicas favoritas.
+- Ver o perfil da pessoa logada.
 
 
 ## Habilidades adquiridas

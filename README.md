@@ -66,13 +66,19 @@ Inicie o servidor:
 
 Neste projeto, fui avaliado se eu era capaz de:
 
-- Utilizar o banco de dados MongoDB e o ODM Mongoose.
+- Fazer requisições e consumir dados vindos de uma API.
 
-- Criar uma API REST com typescript.
+- Utilizar os ciclos de vida de um componente React.
 
-- Escrever testes com chai, sinon, jest e mocha.
+- Utilizar a função setState de forma a garantir que um determinado código só é executado após o estado ser atualizado.
 
-- Realizar validações com Zod e Joi.
+- Utilizar o componente BrowserRouter corretamente.
 
-- Utilizar interfaces e classes genéricas.
+- Criar rotas, mapeando o caminho da URL com o componente correspondente, via Route.
+
+- Utilizar o Switch do React Router.
+
+- Usar o componente Redirect pra redirecionar para uma rota específica.
+
+- Criar links de navegação na aplicação com o componente Link.
 
